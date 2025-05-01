@@ -6,6 +6,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Serve static files from the public directory 👇
+app.use(express.static('public'));
+
 // Root route for testing
 app.get('/', (req, res) => {
     res.send('✅ Grocery Price Finder API is running!');
