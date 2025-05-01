@@ -6,12 +6,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/groceryDB', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+mongoose.connect('mongodb+srv://joshuambyrd3:a6CgAVarIxk3IkVB@cluster0.lxay4bv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+    dbName: 'groceryDB'
 })
-.then(() => console.log('✅ MongoDB connected successfully!'))
+.then(() => console.log('✅ MongoDB Atlas connected successfully!'))
 .catch(err => console.log('❌ MongoDB connection error:', err));
+
 // Define Schema & Model
 const ItemSchema = new mongoose.Schema({
 name: String,

@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/groceryDB', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+mongoose.connect('mongodb+srv://joshuambyrd3:a6CgAVarIxk3IkVB@cluster0.lxay4bv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+    dbName: 'groceryDB'
 });
 
 const ItemSchema = new mongoose.Schema({
