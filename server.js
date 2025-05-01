@@ -1,10 +1,16 @@
-// Express.js Backend (server.js)
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const app = express();
+
 app.use(cors());
 app.use(express.json());
+
+// Root route for testing
+app.get('/', (req, res) => {
+    res.send('✅ Grocery Price Finder API is running!');
+});
+
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://joshuambyrd3:a6CgAVarIxk3IkVB@cluster0.lxay4bv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
     dbName: 'groceryDB'
@@ -14,22 +20,25 @@ mongoose.connect('mongodb+srv://joshuambyrd3:a6CgAVarIxk3IkVB@cluster0.lxay4bv.m
 
 // Define Schema & Model
 const ItemSchema = new mongoose.Schema({
-name: String,
-price: Number,
-store: String,
-location: String
+    name: String,
+    price: Number,
+    store: String,
+    location: String
 });
 const Item = mongoose.model('Item', ItemSchema);
+
 // API Routes
 app.get('/api/items', async (req, res) => {
-const items = await Item.find();
-res.json(items);
+    const items = await Item.find();
+    res.json(items);
 });
+
 app.get('/api/cheapest', async (req, res) => {
-const { item } = req.query;
-const cheapest = await Item.find({ name: item }).sort({ price: 1 }).limit(1);
-res.json(cheapest);
+    const { item } = req.query;
+    const cheapest = await Item.find({ name: item }).sort({ price: 1 }).limit(1);
+    res.json(cheapest);
 });
+
+// Listen on the Render port
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
