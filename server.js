@@ -30,4 +30,6 @@ const { item } = req.query;
 const cheapest = await Item.find({ name: item }).sort({ price: 1 }).limit(1);
 res.json(cheapest);
 });
-app.listen(5000, () => console.log('Server running on port 5000'));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
